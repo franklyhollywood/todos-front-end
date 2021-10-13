@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router, 
     Route, 
     Switch,
-    NavLink
+    NavLink,
+    Redirect
 } from 'react-router-dom';
 import './App.css'
 import SignUp from './SignUp.js'
@@ -23,6 +24,12 @@ state = {
     this.setState({ token: token })
   }
 
+  logout = () => {
+    localStorage.clear()
+    this.setState({ token: ''})
+    
+  }
+
 
     render() {
         return (
@@ -30,9 +37,8 @@ state = {
                 <Router>
                 <header>
                     <NavLink exact activeClassName='active-link' to="/">Home</NavLink>
-                    {/* <NavLink exact activeClassName='active-link' to="/SignUp">Sign Up</NavLink>
-                    <NavLink exact activeClassName='active-link' to="/SignIn">Sign In</NavLink>
-                    <NavLink exact activeClassName='active-link' to="/todos">To Dos</NavLink> */}
+                    <NavLink exact activeClassName='active-link' to="/todos">To Dos</NavLink>
+                    {this.state.token && <button onClick={this.logout}>Logout</button>}
                   </header>
                     <Switch>
                         <Route 
@@ -57,9 +63,14 @@ state = {
                         <Route 
                           path="/todos" 
                           exact
-                          render={(routerProps) => <Todos 
+                          render={(routerProps) => 
+                          this.state.token
+                          ? <Todos 
                           token = {this.state.token}  
-                          {...routerProps} />}
+                          {...routerProps} />
+                          : <Redirect to = "/signin" />
+                        }
+                         
 
                         />
                     </Switch>
