@@ -57,7 +57,10 @@ state = {
                         <Route 
                           path="/todos" 
                           exact
-                          render={(routerProps) => <Todos {...routerProps} />} 
+                          render={(routerProps) => <Todos 
+                          token = {this.state.token}  
+                          {...routerProps} />}
+
                         />
                     </Switch>
                 </Router>
