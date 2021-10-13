@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import login from './Fetch-utils.js'
+import { login } from './Fetch-utils.js'
 import { Link } from 'react-router-dom'
+
 export default class Signin extends Component {
     
     state = {
@@ -27,7 +28,7 @@ render() {
     return (
         <div>
             <section>
-                <h4> Sign up </h4>
+                <h4> Sign In </h4>
             <form onSubmit = {this.handleSubmit }>
                 <label>
                     email
