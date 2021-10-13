@@ -14,10 +14,12 @@ export async function fetchAllToDos(token) {
 }
 
 //Update one todo:
-export async function updateToDos(token, id) {  
+export async function updateToDos(token, id, completedStatus) {  
     const response = await request
     .put(`${URL}/api/todos/${id}`)
+    .send({completed: completedStatus})
     .set('Authorization', token)
+    
     
     return response.body;
 }
@@ -26,7 +28,7 @@ export async function updateToDos(token, id) {
 export async function createToDo(todo, token) {
     const response = await request
     .post(`${URL}/api/todos`)
-    .send ({todo: todo})
+    .send ({todo: todo, completed: false})
     .set('Authorization', token)
     
     return response.body;
